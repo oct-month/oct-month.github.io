@@ -146,19 +146,19 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-杂项/python3 CGI 编程遇到的坑" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-杂项/mySQL 的中文问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/01/22/%E6%9D%82%E9%A1%B9/python3%20CGI%20%E7%BC%96%E7%A8%8B%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91/">杂项/python3 CGI 编程遇到的坑</a>
+      <a class="article-title" href="/2020/01/22/%E6%9D%82%E9%A1%B9/mySQL%20%E7%9A%84%E4%B8%AD%E6%96%87%E9%97%AE%E9%A2%98/">杂项/mySQL 的中文问题</a>
     </h1>
   
 
         
-        <a href="/2020/01/22/%E6%9D%82%E9%A1%B9/python3%20CGI%20%E7%BC%96%E7%A8%8B%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91/" class="archive-article-date">
+        <a href="/2020/01/22/%E6%9D%82%E9%A1%B9/mySQL%20%E7%9A%84%E4%B8%AD%E6%96%87%E9%97%AE%E9%A2%98/" class="archive-article-date">
   	<time datetime="2020-01-22T03:34:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-22</time>
 </a>
         
@@ -166,7 +166,19 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="python3-CGI-编程遇到的坑"><a href="#python3-CGI-编程遇到的坑" class="headerlink" title="python3 CGI 编程遇到的坑"></a>python3 CGI 编程遇到的坑</h2><p>当把.cgi文件放到/usr/lib/cgi-bin/目录下后，应该回到上一层目录，然后调用命令：python -m http.server –cgi 8081<br>来启动python3的服务，不然网页是打不开的。<br>然后访问的网页应该是：localhost:8081/cgi-bin/*.cgi<br>（8081可以自己改）</p>
+        <p>MySQL的默认编码是 latin1<br>而这个编码是不识别中文的。</p>
+<p>解决方案：<br>1、</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nano &#x2F;etc&#x2F;mysql&#x2F;conf.d&#x2F;mysql.cnf</span><br></pre></td></tr></table></figure>
+<p>修改如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line">character_set_server &#x3D; utf8</span><br></pre></td></tr></table></figure>
+
+<p>2、（可以不设置）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nano  &#x2F;etc&#x2F;mysql&#x2F;mysql.conf.d&#x2F;mysqld.cnf</span><br></pre></td></tr></table></figure>
+<p>在 [mysqld] 里添加如下位置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">character-set-server &#x3D; utf8</span><br></pre></td></tr></table></figure>
+
+<p>3、<br>建立数据库时默认数据库编码是latin1<br>更改方式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter database &lt;库名&gt; character set utf8;</span><br></pre></td></tr></table></figure>
 
       
 
@@ -190,7 +202,88 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2020/01/22/%E6%9D%82%E9%A1%B9/python3%20CGI%20%E7%BC%96%E7%A8%8B%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/01/22/%E6%9D%82%E9%A1%B9/mySQL%20%E7%9A%84%E4%B8%AD%E6%96%87%E9%97%AE%E9%A2%98/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-杂项/python3 的虚环境 virtualenv" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/01/22/%E6%9D%82%E9%A1%B9/python3%20%E7%9A%84%E8%99%9A%E7%8E%AF%E5%A2%83%20virtualenv/">杂项/python3 的虚环境 virtualenv</a>
+    </h1>
+  
+
+        
+        <a href="/2020/01/22/%E6%9D%82%E9%A1%B9/python3%20%E7%9A%84%E8%99%9A%E7%8E%AF%E5%A2%83%20virtualenv/" class="archive-article-date">
+  	<time datetime="2020-01-22T03:34:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-22</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="虚环境的安装"><a href="#虚环境的安装" class="headerlink" title="虚环境的安装"></a>虚环境的安装</h2><p>很简单的一条命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip3 install virtualenv</span><br></pre></td></tr></table></figure>
+
+<h2 id="虚环境的搭建"><a href="#虚环境的搭建" class="headerlink" title="虚环境的搭建"></a>虚环境的搭建</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virtualenv venv -p python3</span><br></pre></td></tr></table></figure>
+<p>该命令会在当前目录下建立一个venv文件夹<br>venv是默认名称，也可以指定其他名称，单最好用默认的<br>./venv/bin  下包含了当前虚环境的可执行文件</p>
+<h2 id="进入虚环境"><a href="#进入虚环境" class="headerlink" title="进入虚环境"></a>进入虚环境</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source .&#x2F;venv&#x2F;bin&#x2F;activate</span><br></pre></td></tr></table></figure>
+<p>在虚环境中安装的组件会在./venv/lib 目录中，而不会影响系统的python3 环境</p>
+<h2 id="退出虚环境"><a href="#退出虚环境" class="headerlink" title="退出虚环境"></a>退出虚环境</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">deactivate</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">杂项</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/01/22/%E6%9D%82%E9%A1%B9/python3%20%E7%9A%84%E8%99%9A%E7%8E%AF%E5%A2%83%20virtualenv/">展开全文 >></a>
         </p>
       
 
@@ -312,19 +405,19 @@
 
 
   
-    <article id="post-杂项/python3 的虚环境 virtualenv" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-杂项/rhel yum 配置清华源" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/01/22/%E6%9D%82%E9%A1%B9/python3%20%E7%9A%84%E8%99%9A%E7%8E%AF%E5%A2%83%20virtualenv/">杂项/python3 的虚环境 virtualenv</a>
+      <a class="article-title" href="/2020/01/22/%E6%9D%82%E9%A1%B9/rhel%20yum%20%E9%85%8D%E7%BD%AE%E6%B8%85%E5%8D%8E%E6%BA%90/">杂项/rhel yum 配置清华源</a>
     </h1>
   
 
         
-        <a href="/2020/01/22/%E6%9D%82%E9%A1%B9/python3%20%E7%9A%84%E8%99%9A%E7%8E%AF%E5%A2%83%20virtualenv/" class="archive-article-date">
+        <a href="/2020/01/22/%E6%9D%82%E9%A1%B9/rhel%20yum%20%E9%85%8D%E7%BD%AE%E6%B8%85%E5%8D%8E%E6%BA%90/" class="archive-article-date">
   	<time datetime="2020-01-22T03:34:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-22</time>
 </a>
         
@@ -332,14 +425,12 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="虚环境的安装"><a href="#虚环境的安装" class="headerlink" title="虚环境的安装"></a>虚环境的安装</h2><p>很简单的一条命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip3 install virtualenv</span><br></pre></td></tr></table></figure>
+        <p>在RHEL中，yum的配置文件为/etc/yum.repos.d/redhat.repo<br>里面是空的，没有任何仓库。</p>
+<p>在这个目录下新建一个tsinghua.repo文件，写入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br></pre></td><td class="code"><pre><span class="line">[rhel-8-baseos-beta-source-rpms]</span><br><span class="line">name &#x3D; Red Hat Enterprise Linux 8 - BaseOS Beta (Source RPMs)</span><br><span class="line">baseurl &#x3D; https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;redhat&#x2F;rhel&#x2F;rhel-8-beta&#x2F;baseos&#x2F;source&#x2F;</span><br><span class="line">enabled &#x3D; 1</span><br><span class="line">gpgcheck &#x3D; 1</span><br><span class="line">gpgkey &#x3D; file:&#x2F;&#x2F;&#x2F;etc&#x2F;pki&#x2F;rpm-gpg&#x2F;RPM-GPG-KEY-redhat-beta,file:&#x2F;&#x2F;&#x2F;etc&#x2F;pki&#x2F;rpm-gpg&#x2F;RPM-GPG-KEY-redhat-release</span><br><span class="line"></span><br><span class="line">[rhel-8-for-aarch64-baseos-beta-rpms]</span><br><span class="line">name &#x3D; Red Hat Enterprise Linux 8 for ARM 64 - BaseOS Beta (RPMs)</span><br><span class="line">baseurl &#x3D; https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;redhat&#x2F;rhel&#x2F;rhel-8-beta&#x2F;baseos&#x2F;aarch64&#x2F;</span><br><span class="line">enabled &#x3D; 1</span><br><span class="line">gpgcheck &#x3D; 1</span><br><span class="line">gpgkey &#x3D; file:&#x2F;&#x2F;&#x2F;etc&#x2F;pki&#x2F;rpm-gpg&#x2F;RPM-GPG-KEY-redhat-beta,file:&#x2F;&#x2F;&#x2F;etc&#x2F;pki&#x2F;rpm-gpg&#x2F;RPM-GPG-KEY-redhat-release</span><br><span class="line"></span><br><span class="line">[rhel-8-for-ppc64le-baseos-beta-rpms]</span><br><span class="line">name &#x3D; Red Hat Enterprise Linux 8 for Power, little endian - BaseOS Beta (RPMs)</span><br><span class="line">baseurl &#x3D; https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;redhat&#x2F;rhel&#x2F;rhel-8-beta&#x2F;baseos&#x2F;ppc64le&#x2F;</span><br><span class="line">enabled &#x3D; 1</span><br><span class="line">gpgcheck &#x3D; 1</span><br><span class="line">gpgkey &#x3D; file:&#x2F;&#x2F;&#x2F;etc&#x2F;pki&#x2F;rpm-gpg&#x2F;RPM-GPG-KEY-redhat-beta,file:&#x2F;&#x2F;&#x2F;etc&#x2F;pki&#x2F;rpm-gpg&#x2F;RPM-GPG-KEY-redhat-release</span><br><span class="line"></span><br><span class="line">[rhel-8-for-s390x-baseos-beta-rpms]</span><br><span class="line">name &#x3D; Red Hat Enterprise Linux 8 for IBM z Systems - BaseOS Beta (RPMs)</span><br><span class="line">baseurl &#x3D; https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;redhat&#x2F;rhel&#x2F;rhel-8-beta&#x2F;baseos&#x2F;s390x&#x2F;</span><br><span class="line">enabled &#x3D; 1</span><br><span class="line">gpgcheck &#x3D; 1</span><br><span class="line">gpgkey &#x3D; file:&#x2F;&#x2F;&#x2F;etc&#x2F;pki&#x2F;rpm-gpg&#x2F;RPM-GPG-KEY-redhat-beta,file:&#x2F;&#x2F;&#x2F;etc&#x2F;pki&#x2F;rpm-gpg&#x2F;RPM-GPG-KEY-redhat-release</span><br><span class="line"></span><br><span class="line">[rhel-8-for-x86_64-baseos-beta-rpms]</span><br><span class="line">name &#x3D; Red Hat Enterprise Linux 8 for x86_64 - BaseOS Beta (RPMs)</span><br><span class="line">baseurl &#x3D; https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;redhat&#x2F;rhel&#x2F;rhel-8-beta&#x2F;baseos&#x2F;x86_64&#x2F;</span><br><span class="line">enabled &#x3D; 1</span><br><span class="line">gpgcheck &#x3D; 1</span><br><span class="line">gpgkey &#x3D; file:&#x2F;&#x2F;&#x2F;etc&#x2F;pki&#x2F;rpm-gpg&#x2F;RPM-GPG-KEY-redhat-beta,file:&#x2F;&#x2F;&#x2F;etc&#x2F;pki&#x2F;rpm-gpg&#x2F;RPM-GPG-KEY-redhat-release</span><br><span class="line"></span><br><span class="line">[rhel-8-appstream-beta-source-rpms]</span><br><span class="line">name &#x3D; Red Hat Enterprise Linux 8 - AppStream Beta (Source RPMs)</span><br><span class="line">baseurl &#x3D; https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;redhat&#x2F;rhel&#x2F;rhel-8-beta&#x2F;appstream&#x2F;source&#x2F;</span><br><span class="line">enabled &#x3D; 1</span><br><span class="line">gpgcheck &#x3D; 1</span><br><span class="line">gpgkey &#x3D; file:&#x2F;&#x2F;&#x2F;etc&#x2F;pki&#x2F;rpm-gpg&#x2F;RPM-GPG-KEY-redhat-beta,file:&#x2F;&#x2F;&#x2F;etc&#x2F;pki&#x2F;rpm-gpg&#x2F;RPM-GPG-KEY-redhat-release</span><br><span class="line"></span><br><span class="line">[rhel-8-for-aarch64-appstream-beta-rpms]</span><br><span class="line">name &#x3D; Red Hat Enterprise Linux 8 for ARM 64 - AppStream Beta (RPMs)</span><br><span class="line">baseurl &#x3D; https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;redhat&#x2F;rhel&#x2F;rhel-8-beta&#x2F;appstream&#x2F;aarch64&#x2F;</span><br><span class="line">enabled &#x3D; 1</span><br><span class="line">gpgcheck &#x3D; 1</span><br><span class="line">gpgkey &#x3D; file:&#x2F;&#x2F;&#x2F;etc&#x2F;pki&#x2F;rpm-gpg&#x2F;RPM-GPG-KEY-redhat-beta,file:&#x2F;&#x2F;&#x2F;etc&#x2F;pki&#x2F;rpm-gpg&#x2F;RPM-GPG-KEY-redhat-release</span><br><span class="line"></span><br><span class="line">[rhel-8-for-ppc64le-appstream-beta-rpms]</span><br><span class="line">name &#x3D; Red Hat Enterprise Linux 8 for Power, little endian - AppStream Beta (RPMs)</span><br><span class="line">baseurl &#x3D; https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;redhat&#x2F;rhel&#x2F;rhel-8-beta&#x2F;appstream&#x2F;ppc64le&#x2F;</span><br><span class="line">enabled &#x3D; 1</span><br><span class="line">gpgcheck &#x3D; 1</span><br><span class="line">gpgkey &#x3D; file:&#x2F;&#x2F;&#x2F;etc&#x2F;pki&#x2F;rpm-gpg&#x2F;RPM-GPG-KEY-redhat-beta,file:&#x2F;&#x2F;&#x2F;etc&#x2F;pki&#x2F;rpm-gpg&#x2F;RPM-GPG-KEY-redhat-release</span><br><span class="line"></span><br><span class="line">[rhel-8-for-s390x-appstream-beta-rpms]</span><br><span class="line">name &#x3D; Red Hat Enterprise Linux 8 for IBM z Systems - AppStream Beta (RPMs)</span><br><span class="line">baseurl &#x3D; https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;redhat&#x2F;rhel&#x2F;rhel-8-beta&#x2F;appstream&#x2F;s390x&#x2F;</span><br><span class="line">enabled &#x3D; 1</span><br><span class="line">gpgcheck &#x3D; 1</span><br><span class="line">gpgkey &#x3D; file:&#x2F;&#x2F;&#x2F;etc&#x2F;pki&#x2F;rpm-gpg&#x2F;RPM-GPG-KEY-redhat-beta,file:&#x2F;&#x2F;&#x2F;etc&#x2F;pki&#x2F;rpm-gpg&#x2F;RPM-GPG-KEY-redhat-release</span><br><span class="line"></span><br><span class="line">[rhel-8-for-x86_64-appstream-beta-rpms]</span><br><span class="line">name &#x3D; Red Hat Enterprise Linux 8 for x86_64 - AppStream Beta (RPMs)</span><br><span class="line">baseurl &#x3D; https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;redhat&#x2F;rhel&#x2F;rhel-8-beta&#x2F;appstream&#x2F;x86_64&#x2F;</span><br><span class="line">enabled &#x3D; 1</span><br><span class="line">gpgcheck &#x3D; 1</span><br><span class="line">gpgkey &#x3D; file:&#x2F;&#x2F;&#x2F;etc&#x2F;pki&#x2F;rpm-gpg&#x2F;RPM-GPG-KEY-redhat-beta,file:&#x2F;&#x2F;&#x2F;etc&#x2F;pki&#x2F;rpm-gpg&#x2F;RPM-GPG-KEY-redhat-release</span><br><span class="line"></span><br><span class="line">[rhel-8-ha-beta-source-rpms]</span><br><span class="line">name &#x3D; Red Hat Enterprise Linux 8 - HighAvailability Beta (Source RPMs)</span><br><span class="line">baseurl &#x3D; https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;redhat&#x2F;rhel&#x2F;rhel-8-beta&#x2F;add-ons&#x2F;ha&#x2F;source&#x2F;</span><br><span class="line">enabled &#x3D; 1</span><br><span class="line">gpgcheck &#x3D; 1</span><br><span class="line">gpgkey &#x3D; file:&#x2F;&#x2F;&#x2F;etc&#x2F;pki&#x2F;rpm-gpg&#x2F;RPM-GPG-KEY-redhat-beta,file:&#x2F;&#x2F;&#x2F;etc&#x2F;pki&#x2F;rpm-gpg&#x2F;RPM-GPG-KEY-redhat-release</span><br><span class="line"></span><br><span class="line">[rhel-8-for-ppc64le-ha-beta-rpms]</span><br><span class="line">name &#x3D; Red Hat Enterprise Linux 8 for Power, little endian - HighAvailability Beta (RPMs)</span><br><span class="line">baseurl &#x3D; https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;redhat&#x2F;rhel&#x2F;rhel-8-beta&#x2F;add-ons&#x2F;ha&#x2F;ppc64le&#x2F;</span><br><span class="line">enabled &#x3D; 1</span><br><span class="line">gpgcheck &#x3D; 1</span><br><span class="line">gpgkey &#x3D; file:&#x2F;&#x2F;&#x2F;etc&#x2F;pki&#x2F;rpm-gpg&#x2F;RPM-GPG-KEY-redhat-beta,file:&#x2F;&#x2F;&#x2F;etc&#x2F;pki&#x2F;rpm-gpg&#x2F;RPM-GPG-KEY-redhat-release</span><br><span class="line"></span><br><span class="line">[rhel-8-for-s390x-ha-beta-rpms]</span><br><span class="line">name &#x3D; Red Hat Enterprise Linux 8 for IBM z Systems - HighAvailability Beta (RPMs)</span><br><span class="line">baseurl &#x3D; https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;redhat&#x2F;rhel&#x2F;rhel-8-beta&#x2F;add-ons&#x2F;ha&#x2F;s390x&#x2F;</span><br><span class="line">enabled &#x3D; 1</span><br><span class="line">gpgcheck &#x3D; 1</span><br><span class="line">gpgkey &#x3D; file:&#x2F;&#x2F;&#x2F;etc&#x2F;pki&#x2F;rpm-gpg&#x2F;RPM-GPG-KEY-redhat-beta,file:&#x2F;&#x2F;&#x2F;etc&#x2F;pki&#x2F;rpm-gpg&#x2F;RPM-GPG-KEY-redhat-release</span><br><span class="line"></span><br><span class="line">[rhel-8-for-x86_64-ha-beta-rpms]</span><br><span class="line">name &#x3D; Red Hat Enterprise Linux 8 for x86_64 - HighAvailability Beta (RPMs)</span><br><span class="line">baseurl &#x3D; https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;redhat&#x2F;rhel&#x2F;rhel-8-beta&#x2F;add-ons&#x2F;ha&#x2F;x86_64&#x2F;</span><br><span class="line">enabled &#x3D; 1</span><br><span class="line">gpgcheck &#x3D; 1</span><br><span class="line">gpgkey &#x3D; file:&#x2F;&#x2F;&#x2F;etc&#x2F;pki&#x2F;rpm-gpg&#x2F;RPM-GPG-KEY-redhat-beta,file:&#x2F;&#x2F;&#x2F;etc&#x2F;pki&#x2F;rpm-gpg&#x2F;RPM-GPG-KEY-redhat-release</span><br><span class="line"></span><br><span class="line">[rhel-8-rs-beta-source-rpms]</span><br><span class="line">name &#x3D; Red Hat Enterprise Linux 8 - ResilientStorage Beta (Source RPMs)</span><br><span class="line">baseurl &#x3D; https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;redhat&#x2F;rhel&#x2F;rhel-8-beta&#x2F;add-ons&#x2F;rs&#x2F;source&#x2F;</span><br><span class="line">enabled &#x3D; 1</span><br><span class="line">gpgcheck &#x3D; 1</span><br><span class="line">gpgkey &#x3D; file:&#x2F;&#x2F;&#x2F;etc&#x2F;pki&#x2F;rpm-gpg&#x2F;RPM-GPG-KEY-redhat-beta,file:&#x2F;&#x2F;&#x2F;etc&#x2F;pki&#x2F;rpm-gpg&#x2F;RPM-GPG-KEY-redhat-release</span><br><span class="line"></span><br><span class="line">[rhel-8-for-ppc64le-rs-beta-rpms]</span><br><span class="line">name &#x3D; Red Hat Enterprise Linux 8 for Power, little endian - ResilientStorage Beta (RPMs)</span><br><span class="line">baseurl &#x3D; https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;redhat&#x2F;rhel&#x2F;rhel-8-beta&#x2F;add-ons&#x2F;rs&#x2F;ppc64le&#x2F;</span><br><span class="line">enabled &#x3D; 1</span><br><span class="line">gpgcheck &#x3D; 1</span><br><span class="line">gpgkey &#x3D; file:&#x2F;&#x2F;&#x2F;etc&#x2F;pki&#x2F;rpm-gpg&#x2F;RPM-GPG-KEY-redhat-beta,file:&#x2F;&#x2F;&#x2F;etc&#x2F;pki&#x2F;rpm-gpg&#x2F;RPM-GPG-KEY-redhat-release</span><br><span class="line"></span><br><span class="line">[rhel-8-for-s390x-rs-beta-rpms]</span><br><span class="line">name &#x3D; Red Hat Enterprise Linux 8 for IBM z Systems - ResilientStorage Beta (RPMs)</span><br><span class="line">baseurl &#x3D; https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;redhat&#x2F;rhel&#x2F;rhel-8-beta&#x2F;add-ons&#x2F;rs&#x2F;s390x&#x2F;</span><br><span class="line">enabled &#x3D; 1</span><br><span class="line">gpgcheck &#x3D; 1</span><br><span class="line">gpgkey &#x3D; file:&#x2F;&#x2F;&#x2F;etc&#x2F;pki&#x2F;rpm-gpg&#x2F;RPM-GPG-KEY-redhat-beta,file:&#x2F;&#x2F;&#x2F;etc&#x2F;pki&#x2F;rpm-gpg&#x2F;RPM-GPG-KEY-redhat-release</span><br><span class="line"></span><br><span class="line">[rhel-8-for-x86_64-rs-beta-rpms]</span><br><span class="line">name &#x3D; Red Hat Enterprise Linux 8 for x86_64 - ResilientStorage Beta (RPMs)</span><br><span class="line">baseurl &#x3D; https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;redhat&#x2F;rhel&#x2F;rhel-8-beta&#x2F;add-ons&#x2F;rs&#x2F;x86_64&#x2F;</span><br><span class="line">enabled &#x3D; 1</span><br><span class="line">gpgcheck &#x3D; 1</span><br><span class="line">gpgkey &#x3D; file:&#x2F;&#x2F;&#x2F;etc&#x2F;pki&#x2F;rpm-gpg&#x2F;RPM-GPG-KEY-redhat-beta,file:&#x2F;&#x2F;&#x2F;etc&#x2F;pki&#x2F;rpm-gpg&#x2F;RPM-GPG-KEY-redhat-release</span><br><span class="line"></span><br><span class="line">[rhel-8-rt-beta-source-rpms]</span><br><span class="line">name &#x3D; Red Hat Enterprise Linux 8 - RT Beta (Source RPMs)</span><br><span class="line">baseurl &#x3D; https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;redhat&#x2F;rhel&#x2F;rhel-8-beta&#x2F;add-ons&#x2F;rt&#x2F;source&#x2F;</span><br><span class="line">enabled &#x3D; 1</span><br><span class="line">gpgcheck &#x3D; 1</span><br><span class="line">gpgkey &#x3D; file:&#x2F;&#x2F;&#x2F;etc&#x2F;pki&#x2F;rpm-gpg&#x2F;RPM-GPG-KEY-redhat-beta,file:&#x2F;&#x2F;&#x2F;etc&#x2F;pki&#x2F;rpm-gpg&#x2F;RPM-GPG-KEY-redhat-release</span><br><span class="line"></span><br><span class="line">[rhel-8-for-x86_64-rt-beta-rpms]</span><br><span class="line">name &#x3D; Red Hat Enterprise Linux 8 for x86_64 - RT Beta (RPMs)</span><br><span class="line">baseurl &#x3D; https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;redhat&#x2F;rhel&#x2F;rhel-8-beta&#x2F;add-ons&#x2F;rt&#x2F;x86_64&#x2F;</span><br><span class="line">enabled &#x3D; 1</span><br><span class="line">gpgcheck &#x3D; 1</span><br><span class="line">gpgkey &#x3D; file:&#x2F;&#x2F;&#x2F;etc&#x2F;pki&#x2F;rpm-gpg&#x2F;RPM-GPG-KEY-redhat-beta,file:&#x2F;&#x2F;&#x2F;etc&#x2F;pki&#x2F;rpm-gpg&#x2F;RPM-GPG-KEY-redhat-release</span><br></pre></td></tr></table></figure>
+<p>然后执行命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo yum clean all</span><br><span class="line">sudo yum makecache</span><br><span class="line">sudo yum update</span><br></pre></td></tr></table></figure>
 
-<h2 id="虚环境的搭建"><a href="#虚环境的搭建" class="headerlink" title="虚环境的搭建"></a>虚环境的搭建</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virtualenv venv -p python3</span><br></pre></td></tr></table></figure>
-<p>该命令会在当前目录下建立一个venv文件夹<br>venv是默认名称，也可以指定其他名称，单最好用默认的<br>./venv/bin  下包含了当前虚环境的可执行文件</p>
-<h2 id="进入虚环境"><a href="#进入虚环境" class="headerlink" title="进入虚环境"></a>进入虚环境</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source .&#x2F;venv&#x2F;bin&#x2F;activate</span><br></pre></td></tr></table></figure>
-<p>在虚环境中安装的组件会在./venv/lib 目录中，而不会影响系统的python3 环境</p>
-<h2 id="退出虚环境"><a href="#退出虚环境" class="headerlink" title="退出虚环境"></a>退出虚环境</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">deactivate</span><br></pre></td></tr></table></figure>
 
       
 
@@ -363,94 +454,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2020/01/22/%E6%9D%82%E9%A1%B9/python3%20%E7%9A%84%E8%99%9A%E7%8E%AF%E5%A2%83%20virtualenv/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-杂项/rhel8下的ftp配置" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/01/22/%E6%9D%82%E9%A1%B9/rhel8%E4%B8%8B%E7%9A%84ftp%E9%85%8D%E7%BD%AE/">杂项/rhel8下的ftp配置</a>
-    </h1>
-  
-
-        
-        <a href="/2020/01/22/%E6%9D%82%E9%A1%B9/rhel8%E4%B8%8B%E7%9A%84ftp%E9%85%8D%E7%BD%AE/" class="archive-article-date">
-  	<time datetime="2020-01-22T03:34:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-22</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="服务安装"><a href="#服务安装" class="headerlink" title="服务安装"></a>服务安装</h1><p>安装</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install vsftpd ftp</span><br></pre></td></tr></table></figure>
-<p>开机自启</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo chkconfig vsftpd on</span><br></pre></td></tr></table></figure>
-<p>防火墙设置</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo firewall-cmd --permanent --add-service=ftp</span><br><span class="line">sudo service firewalld restart</span><br></pre></td></tr></table></figure>
-<h1 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h1><p>/etc/vsftpd/vsftpd.conf</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">#禁止匿名用户</span><br><span class="line">anonymous_enable&#x3D;NO</span><br><span class="line">#启用本地用户</span><br><span class="line">local_enable&#x3D;YES</span><br><span class="line">#启用写权限</span><br><span class="line">write_enable&#x3D;YES</span><br><span class="line">#用户上传文件的权限设置，反向</span><br><span class="line">local_umask&#x3D;000</span><br><span class="line">#根目录的设置</span><br><span class="line">local_root&#x3D;&#x2F;home&#x2F;share</span><br><span class="line">#显示目录说明文件</span><br><span class="line">dirmessage_enable&#x3D;YES</span><br><span class="line"></span><br><span class="line">xferlog_enable&#x3D;YES</span><br><span class="line"></span><br><span class="line">connect_from_port_20&#x3D;YES</span><br><span class="line"></span><br><span class="line">xferlog_std_format&#x3D;YES</span><br><span class="line">#将用户禁锢在主目录，主目录不能有W权限</span><br><span class="line">chroot_local_user&#x3D;YES</span><br><span class="line">#允许主目录有W权限</span><br><span class="line">allow_writeable_chroot&#x3D;YES</span><br><span class="line"></span><br><span class="line">listen&#x3D;YES</span><br><span class="line">#监听ip</span><br><span class="line">listen_address&#x3D;0.0.0.0</span><br><span class="line">#监听端口</span><br><span class="line">listen_port&#x3D;21</span><br><span class="line"></span><br><span class="line">listen_ipv6&#x3D;NO</span><br><span class="line"></span><br><span class="line">pam_service_name&#x3D;vsftpd</span><br><span class="line">#只允许出现在user_list中的用户访问，user_list文件需自行配置</span><br><span class="line">userlist_enable&#x3D;YES</span><br><span class="line">userlist_deny&#x3D;NO</span><br><span class="line"></span><br><span class="line">#被动模式，不设置则浏览器无法访问</span><br><span class="line">pasv_enable&#x3D;YES</span><br><span class="line">pasv_addr_resolve&#x3D;YES</span><br><span class="line">#配置端口范围</span><br><span class="line">pasv_min_port&#x3D;20020</span><br><span class="line">pasv_max_port&#x3D;20020</span><br><span class="line">#j监听地址</span><br><span class="line">pasv_address&#x3D;0.0.0.0</span><br><span class="line">#是否屏蔽对pasv的安全检查，ftp连接后有问题可以试试打开</span><br><span class="line">#pasv_promiscuous&#x3D;YES</span><br></pre></td></tr></table></figure>
-<p>如果打算使用/sbin/nologin用户登录，需要在shells文件中添加一行<br>/sbin/nologin</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vi /etc/shells</span><br></pre></td></tr></table></figure>
-
-<p>打开对应端口</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo firewall-cmd --permanent --add-port=20020/tcp</span><br></pre></td></tr></table></figure>
-<h1 id="重启"><a href="#重启" class="headerlink" title="重启"></a>重启</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo service vsftpd restart</span><br></pre></td></tr></table></figure>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">杂项</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/01/22/%E6%9D%82%E9%A1%B9/rhel8%E4%B8%8B%E7%9A%84ftp%E9%85%8D%E7%BD%AE/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/01/22/%E6%9D%82%E9%A1%B9/rhel%20yum%20%E9%85%8D%E7%BD%AE%E6%B8%85%E5%8D%8E%E6%BA%90/">展开全文 >></a>
         </p>
       
 
@@ -543,13 +547,6 @@
 	<!-- 添加网站运行时间》-->
 
 	<!-- 《网站备案号 -->
-	
-		<div class="BeiAn-info">
-			<img src="https://static.dy208.cn/o_1dfilp8ruo521thr1hvf18ji17soa.png" title="备案管理系统">
-			<a href="http://www.beian.miit.gov.cn/" style="color:#f72b07" target="_blank" title="备案号">
-				赣ICP备20005857号
-			</a>
-		</div>
 	
 	<!-- 网站备案号》 -->
 

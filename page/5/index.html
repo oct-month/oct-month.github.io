@@ -146,19 +146,19 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-杂项/装Debian 遇到的坑" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-杂项/设置MySQL远程访问" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/01/22/%E6%9D%82%E9%A1%B9/%E8%A3%85Debian%20%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91/">杂项/装Debian 遇到的坑</a>
+      <a class="article-title" href="/2020/01/22/%E6%9D%82%E9%A1%B9/%E8%AE%BE%E7%BD%AEMySQL%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE/">杂项/设置MySQL远程访问</a>
     </h1>
   
 
         
-        <a href="/2020/01/22/%E6%9D%82%E9%A1%B9/%E8%A3%85Debian%20%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91/" class="archive-article-date">
+        <a href="/2020/01/22/%E6%9D%82%E9%A1%B9/%E8%AE%BE%E7%BD%AEMySQL%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE/" class="archive-article-date">
   	<time datetime="2020-01-22T03:34:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-22</time>
 </a>
         
@@ -166,7 +166,15 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>1、Debian 安装的时候要网，不然会卡在装软件的步骤，镜像用iso-1<br>2、Debian 有两个账户，普通账户有些命令是无法使用的，root专用命令在/usr/sbin/ 里面，而普通账户是不包括这个文件夹路径的。<br>解决方案：sudo ln -s /usr/sbin/* /usr/bin/<br>3、ctrl + alt +t 是不能打开终端的，要设置自定义快捷方式 gnome-terminal</p>
+        <h1 id="1、修改配置文件"><a href="#1、修改配置文件" class="headerlink" title="1、修改配置文件"></a>1、修改配置文件</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim &#x2F;etc&#x2F;mysql&#x2F;mysql.conf.d&#x2F;mysqld.cnf</span><br></pre></td></tr></table></figure>
+<p>将bind-address = 127.0.0.1注释掉（即在行首加#）<br>除了注视掉这句话之外，还可以把后面的IP地址修改成允许连接的IP地址。</p>
+<h1 id="2、删除匿名用户"><a href="#2、删除匿名用户" class="headerlink" title="2、删除匿名用户"></a>2、删除匿名用户</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">use mysql;</span><br><span class="line">delete from user where user&#x3D;&#39;&#39;&quot;;</span><br></pre></td></tr></table></figure>
+
+<h1 id="3、增加外部用户"><a href="#3、增加外部用户" class="headerlink" title="3、增加外部用户"></a>3、增加外部用户</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">grant all privileges on db_name.* to &#39;user&#39;@&#39;%&#39; identified by &#39;password&#39; with grant option;</span><br><span class="line">sudo service mysql restart</span><br></pre></td></tr></table></figure>
+
+<h2 id="附：MySQL配置文件位置"><a href="#附：MySQL配置文件位置" class="headerlink" title="附：MySQL配置文件位置"></a>附：MySQL配置文件位置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;etc&#x2F;mysql&#x2F;conf.d&#x2F;mysql.cnf</span><br><span class="line">&#x2F;etc&#x2F;mysql&#x2F;mysql.conf.d&#x2F;mysqld.cnf</span><br></pre></td></tr></table></figure>
+
+<h2 id="附：Navicat-Premium-12工具的安装"><a href="#附：Navicat-Premium-12工具的安装" class="headerlink" title="附：Navicat Premium 12工具的安装"></a>附：Navicat Premium 12工具的安装</h2><p><a href="https://www.cnblogs.com/jpfss/articles/9193967.html" target="_blank" rel="noopener">https://www.cnblogs.com/jpfss/articles/9193967.html</a></p>
 
       
 
@@ -190,7 +198,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2020/01/22/%E6%9D%82%E9%A1%B9/%E8%A3%85Debian%20%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/01/22/%E6%9D%82%E9%A1%B9/%E8%AE%BE%E7%BD%AEMySQL%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE/">展开全文 >></a>
         </p>
       
 
@@ -267,92 +275,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2020/01/22/%E6%9D%82%E9%A1%B9/cmd%20%E8%BF%9C%E7%A8%8Bssh%20%E8%BF%9E%E6%8E%A5%E8%99%9A%E6%8B%9F%E6%9C%BA/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-杂项/mySQL 的中文问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/01/22/%E6%9D%82%E9%A1%B9/mySQL%20%E7%9A%84%E4%B8%AD%E6%96%87%E9%97%AE%E9%A2%98/">杂项/mySQL 的中文问题</a>
-    </h1>
-  
-
-        
-        <a href="/2020/01/22/%E6%9D%82%E9%A1%B9/mySQL%20%E7%9A%84%E4%B8%AD%E6%96%87%E9%97%AE%E9%A2%98/" class="archive-article-date">
-  	<time datetime="2020-01-22T03:34:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-22</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>MySQL的默认编码是 latin1<br>而这个编码是不识别中文的。</p>
-<p>解决方案：<br>1、</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nano &#x2F;etc&#x2F;mysql&#x2F;conf.d&#x2F;mysql.cnf</span><br></pre></td></tr></table></figure>
-<p>修改如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line">character_set_server &#x3D; utf8</span><br></pre></td></tr></table></figure>
-
-<p>2、（可以不设置）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nano  &#x2F;etc&#x2F;mysql&#x2F;mysql.conf.d&#x2F;mysqld.cnf</span><br></pre></td></tr></table></figure>
-<p>在 [mysqld] 里添加如下位置：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">character-set-server &#x3D; utf8</span><br></pre></td></tr></table></figure>
-
-<p>3、<br>建立数据库时默认数据库编码是latin1<br>更改方式：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter database &lt;库名&gt; character set utf8;</span><br></pre></td></tr></table></figure>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">杂项</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/01/22/%E6%9D%82%E9%A1%B9/mySQL%20%E7%9A%84%E4%B8%AD%E6%96%87%E9%97%AE%E9%A2%98/">展开全文 >></a>
         </p>
       
 
@@ -465,6 +387,80 @@
 
 
   
+    <article id="post-杂项/python3 CGI 编程遇到的坑" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/01/22/%E6%9D%82%E9%A1%B9/python3%20CGI%20%E7%BC%96%E7%A8%8B%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91/">杂项/python3 CGI 编程遇到的坑</a>
+    </h1>
+  
+
+        
+        <a href="/2020/01/22/%E6%9D%82%E9%A1%B9/python3%20CGI%20%E7%BC%96%E7%A8%8B%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91/" class="archive-article-date">
+  	<time datetime="2020-01-22T03:34:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-22</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="python3-CGI-编程遇到的坑"><a href="#python3-CGI-编程遇到的坑" class="headerlink" title="python3 CGI 编程遇到的坑"></a>python3 CGI 编程遇到的坑</h2><p>当把.cgi文件放到/usr/lib/cgi-bin/目录下后，应该回到上一层目录，然后调用命令：python -m http.server –cgi 8081<br>来启动python3的服务，不然网页是打不开的。<br>然后访问的网页应该是：localhost:8081/cgi-bin/*.cgi<br>（8081可以自己改）</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">杂项</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/01/22/%E6%9D%82%E9%A1%B9/python3%20CGI%20%E7%BC%96%E7%A8%8B%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/4/">« Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/6/">Next »</a>
@@ -528,13 +524,6 @@
 	<!-- 添加网站运行时间》-->
 
 	<!-- 《网站备案号 -->
-	
-		<div class="BeiAn-info">
-			<img src="https://static.dy208.cn/o_1dfilp8ruo521thr1hvf18ji17soa.png" title="备案管理系统">
-			<a href="http://www.beian.miit.gov.cn/" style="color:#f72b07" target="_blank" title="备案号">
-				赣ICP备20005857号
-			</a>
-		</div>
 	
 	<!-- 网站备案号》 -->
 
